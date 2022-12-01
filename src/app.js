@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const { engine } = require('express-handlebars');
 const myconnection = require('express-myconnection');
@@ -6,6 +7,7 @@ const mysql = require('mysql');
 const session = require('express-session')
 const ejemploRoutes = require('./routes/ejemplo');
 const mainScreenRoutes = require('./routes/mainscreen');
+const publicDirectoryPath = path.join(__dirname, 'public')
 
 
 const app = express();
@@ -40,7 +42,7 @@ app.use(session({
 app.use('/', ejemploRoutes);
 app.use('/', mainScreenRoutes);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(publicDirectoryPath));
 
 app.listen(app.get('port'), () => {
     console.log('Oyendo en puerto ', app.get('port'));
